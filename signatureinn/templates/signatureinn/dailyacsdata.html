@@ -1,0 +1,905 @@
+ {% extends "signatureinn/dailyacs.html" %}
+
+
+ {% block content %}
+  
+ 
+
+   	<div class"container-fluid" >
+    <form class="form-horizontal" id="set_date" role="form" action="" method="post">
+    {% csrf_token %}
+      <div class="form-group">
+                      <label class="control-label col-lg-4" for="choose_date">Choose the Date:</label>
+                      <div class="col-lg-4"> 
+                        <input type="date" class="form-control" name="choose_date" id="choose_date1" placeholder="Enter Date" >
+                      </div>
+                      <div class="col-lg-4"> 
+                        <input type="submit" class="btn btn-default" id="submit_date" value="Submit">
+                          
+                        
+                      </div>
+      </div>
+
+      
+    </form>
+   </div>
+    <div class="container-fluid ">
+   		<div class="row dailyacs_body">
+   			<div class="col-sm-6 col-md-6">
+   				<h2>Advance Receipts
+          <button type="button" class="btn btn-info pull-right" id="add_adv">
+          <span class="glyphicon glyphicon-plus"></span>
+          </button>
+          </h2>
+   				<div class="table-responsive">
+   					<table class="table table-condensed table-striped">
+  						          <thead>
+                            <tr>
+                              <th class="header"> Bill No <i class="icon-sort"></i></th>
+                              <th class="header"> Amount <i class="icon-sort"></i></th>                            
+                            </tr>
+                        </thead>
+                        <tbody>                        
+                          
+                          {% for values in advance_num %}
+                          <div id="dynamic_input_adv">
+                            <tr>                                                      
+                              <td class="header"><input type="text" class="form-control" name="advance_no[]" value="{{ values.num }}"><i class="icon-sort"></i></td>                             
+                              <td class="header"><input type="text" class="form-control" name="advance_amt[]" value="{{ values.amt }}"><i class="icon-sort"></i></td>                            
+                            </tr>
+                          </div>                                                
+                         {% endfor %}                    
+                        </tbody>
+					 </table>
+				</div>
+   			</div>
+   			<div class="col-sm-6 col-md-6">
+   				<h2>Invoice Receipts
+          <button type="button" class="btn btn-info pull-right" id="add_inv">
+          <span class="glyphicon glyphicon-plus"></span>
+          </button>
+          </h2>
+   				<div class="table-responsive">
+   					 <table class="table table-condensed table-striped">
+  						          <thead>
+                            <tr>
+                              <th class="header"> Bill No <i class="icon-sort"></i></th>
+                              <th class="header"> Amount <i class="icon-sort"></i></th>                            
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                          {% for values in invoice_num %}
+                          <div id="dynamic_input_inv">
+                            <tr>                                                      
+                              <td class="header"><input type="text" class="form-control" name="invoice_no[]" value="{{ values.num }}"><i class="icon-sort"></i></td> 
+                              <td class="header"><input type="text" class="form-control" name="invoice_amt[]" value="{{ values.amt }}"><i class="icon-sort"></i></td>                            
+                             </tr>
+                          </div>                        
+                         {% endfor %} 
+                                      
+                        </tbody>
+				  	 </table>
+				  </div>
+   			</div>
+   		</div>
+      <!--
+      <div class="row">
+        <button type="button" class="btn btn-info align-center" id="cal_total">Calculate Total</button>
+      </div>
+   	  -->
+        <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom">
+          <div class="container">
+           <form class="form-horizontal" id="ac_form" role="form" action="" method="POST">
+           {% csrf_token %}
+            <div id="top">
+              <div class="row">              
+             
+                      <label class="control-label col-md-1 navbar-content text-center" for="cash_entry">Cash:</label>
+                      <div class="col-md-2 navbar-content"> 
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="cash_entry" value="{{db_cash_total}}">
+                            <span class="input-group-btn">
+                            <button class="btn btn-info pull-right" type="button" data-toggle="modal" data-target="#cash_popup">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            </span>                        
+                        </div>
+                      </div>
+              
+                      <label class="control-label col-md-1 navbar-content text-center" for="card_entry">Card:</label>
+                      <div class="col-md-2 navbar-content"> 
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="card_entry" value="{{db_card_total}}">
+                            <span class="input-group-btn">
+                            <button class="btn btn-info pull-right" type="button" data-toggle="modal" data-target="#card_popup">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            </span>                        
+                        </div>
+                      </div>
+            
+                      <label class="control-label col-md-1 navbar-content text-center" for="bank_entry">Bank:</label>
+                      <div class="col-md-2 navbar-content"> 
+                        <input type="text" class="form-control" id="bank_entry" value="{{db_bank_total}}">
+                      </div>
+                      <label class="control-label col-md-1 navbar-content text-center" for="counter_entry">Counter:</label>
+                      <div class="col-md-2 navbar-content"> 
+                        <input type="text" class="form-control" id="counter_entry" placeholder="Enter Counter">
+                      </div>
+              </div>
+              <br><br>
+              <div class="row">
+              
+                      
+                      <label class="control-label col-md-2 group-down text-center" for="ota_rev">OTA Rev:</label>
+                        <div class=" col-md-3">
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="ota_rev" value="{{db_ota_rev_total}}">
+                            <span class="input-group-btn">
+                            <button class="btn btn-info pull-right" type="button" data-toggle="modal" data-target="#ota_rev_popup">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            </span>                        
+                          </div>
+                        </div>
+                      
+                      <label class="control-label col-md-2 group-down text-center" for="expense_amt">Expenses:</label>
+                      <div class=" col-md-3">
+                          <div class="input-group">
+                            <input type="text" class="form-control " id="expense_amt" value="{{total_expense}}">
+                            <span class="input-group-btn">
+                            <button class="btn btn-info pull-right" type="button" data-toggle="modal" data-target="#expense_popup">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            </span>                        
+                         </div>
+                      </div>
+                      <div class=" col-md-2">
+                          <div class="input-group">
+                            
+                          </div>
+                      </div>
+            </div>
+          
+                
+          
+          </div><!-- end of div top-->
+            <div class="row" id="base">              
+                      <label class="control-label col-sm-2 col-md-2 group-down text-center" for="daily_total">Daily Total:</label>
+                      <div class="col-sm-2 col-md-2 group-down"> 
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="daily_total" value="">
+                            <span class="input-group-btn">
+                            <button class="btn btn-info pull-right" type="button" id="cal_daily_total">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            </span>                        
+                        </div>
+                      </div>
+
+                                              
+                      <label class="control-label col-sm-2 col-md-2 group-down text-center" for="total_rev_entry">Total Rev:</label>
+                      <div class="col-sm-2 col-md-2 group-down"> 
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="total_rev_entry" value="{{db_total_revenue_day}}">
+                            <span class="input-group-btn">
+                            <button class="btn btn-info pull-right" type="button" id="cal_total_rev">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            </span>                        
+                        </div>
+                      </div>
+              
+                      <label class="control-label col-sm-2 col-md-2 group-down text-center" for="actual_rev_entry">Actual Rev:</label>
+                      <div class="col-sm-2 col-md-2 group-down"> 
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="actual_rev_entry" value="{{db_act_revenue_day}}">
+                            <span class="input-group-btn">
+                            <button class="btn btn-info pull-right" type="button" id="cal_actual_rev">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                            </span>                        
+                        </div>
+                      </div>                      
+            </div>
+            <button type="submit" class="btn btn-default" id="ac_total_list">Calculate</button>
+          </div>
+
+         </form>
+        </nav>
+      
+	</div>
+
+  
+  
+  <!--Ota Revenue content-->
+
+  
+       <div id="ota_rev_popup" class="modal fade" role="dialog"> 
+        <div class="modal-dialog">
+            <!-- Modal content-->
+          <div class="modal-content">
+            <div class="container-fluid">
+              
+                <form class="form-horizontal" id="ota_rev_form" role="form" action="" method="post">
+                 <div class="row"><!-- Start of Header Row-->
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Daily OTA Revenue Entry</h4>
+                  </div>
+                 </div><!-- Endof Header Row-->
+                 <div class="row"><!-- Start of Body Row-->
+                  <div class="modal-body">
+                    <div class="col-md-3">
+                      <label class="control-label" >Enter OTA Amount:</label>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="dropdown">
+                          
+                           <input type="button" class="btn btn-default btn-md dropdown-toggle dropdown_list " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="OTA Category"> 
+                          <ul class="dropdown-menu dropdown_menu_list" aria-labelledby="dropdownMenu1" id="dropdownMenu1">
+                            <li><a href="">Goibibo</a></li>
+                            <li><a href="">Makemytrip</a></li>
+                            <li><a href="">Booking.com</a></li>
+                            <li><a href="">Cleartrip</a></li>
+                            <li><a href="">Agoda</a></li>
+                            <li><a href="">Travelguru</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="">Agents</a></li>
+                          </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" class="form-control " id="new_ota_rev_entry1" value=""><i class="icon-sort"></i>
+                    </div>
+                           <div class="col-md-3">
+                      <label class="control-label" >Enter OTA Amount:</label>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="dropdown">
+                          <input type="button" class="btn btn-default btn-md dropdown-toggle dropdown_list " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="OTA Category"> 
+                          <ul class="dropdown-menu dropdown_menu_list" aria-labelledby="dropdownMenu2" id="dropdownMenu2"> 
+                            <li><a href="#">Goibibo</a></li>
+                            <li><a href="#">Makemytrip</a></li>
+                            <li><a href="#">Booking.com</a></li>
+                            <li><a href="#">Cleartrip</a></li>
+                            <li><a href="#">Agoda</a></li>
+                            <li><a href="#">Travelguru</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Agents</a></li>
+                          </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" class="form-control " id="new_ota_rev_entry2" value=""><i class="icon-sort"></i>
+                    </div>
+                           <div class="col-md-3">
+                      <label class="control-label" >Enter OTA Amount:</label>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="dropdown">
+                          <input type="button" class="btn btn-default btn-md dropdown-toggle dropdown_list " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="OTA Category"> 
+                          <ul class="dropdown-menu dropdown_menu_list" aria-labelledby="dropdownMenu3" id="dropdownMenu3">
+                            <li><a href="#">Goibibo</a></li>
+                            <li><a href="#">Makemytrip</a></li>
+                            <li><a href="#">Booking.com</a></li>
+                            <li><a href="#">Cleartrip</a></li>
+                            <li><a href="#">Agoda</a></li>
+                            <li><a href="#">Travelguru</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Agents</a></li>
+                          </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" class="form-control " id="new_ota_rev_entry3" value=""><i class="icon-sort"></i>
+                    </div>
+                           <div class="col-md-3">
+                      <label class="control-label" >Enter OTA Amount:</label>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="dropdown">
+                          <input type="button" class="btn btn-default btn-md dropdown-toggle dropdown_list " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="OTA Category"> 
+                          <ul class="dropdown-menu dropdown_menu_list" aria-labelledby="dropdownMenu4" id="dropdownMenu4">
+                            <li><a href="#">Goibibo</a></li>
+                            <li><a href="#">Makemytrip</a></li>
+                            <li><a href="#">Booking.com</a></li>
+                            <li><a href="#">Cleartrip</a></li>
+                            <li><a href="#">Agoda</a></li>
+                            <li><a href="#">Travelguru</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Agents</a></li>
+                          </ul>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" class="form-control " id="new_ota_rev_entry4" value=""><i class="icon-sort"></i>
+                    </div>
+                  </div>
+                 </div><!-- Endof Body Row-->
+                 <br><br>
+                 <div class="row"><!-- Start of Footer Row-->
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-default" data-dismiss="modal" id="ota_rev_list" value="add">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                 </div><!-- Endof Footer Row-->
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+                
+ <!--End of OTA Revenue Modal content-->             
+            
+
+
+
+
+
+
+<!--Cash Modal content-->
+
+  
+       <div id="cash_popup" class="modal fade" role="dialog"> 
+        <div class="modal-dialog">
+            <!-- Modal content-->
+          <div class="modal-content">
+            <div class="container-fluid">
+              
+                <form class="form-horizontal" id="cash_form" role="form" action="" method="post">
+                 <div class="row"><!-- Start of Header Row-->
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Daily Cash Entry</h4>
+                  </div>
+                 </div><!-- Endof Header Row-->
+                 <div class="row"><!-- Start of Body Row-->
+                  <div class="modal-body">
+                    <div class="col-md-3">
+                      <label class="control-label" >Enter Cash Amount:</label>
+                    </div>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control " id="new_cash_entry" value=""><i class="icon-sort"></i>
+                    </div>
+                  </div>
+                 </div><!-- Endof Body Row-->
+                 <div class="row"><!-- Start of Footer Row-->
+                  <div class="modal-footer">
+                  <input type="submit" class="btn btn-default" data-dismiss="modal" id="cash_list" value="add">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                 </div><!-- Endof Footer Row-->
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+                
+ <!--End of Cash Modal content-->             
+
+
+
+
+ <!--Card Modal content-->
+
+  
+       <div id="card_popup" class="modal fade" role="dialog"> 
+        <div class="modal-dialog">
+            <!-- Modal content-->
+          <div class="modal-content">
+            <div class="container-fluid">
+              
+                <form class="form-horizontal" id="card_form" role="form" action="" method="post">
+                 <div class="row"><!-- Start of Header Row-->
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Daily Card Entry</h4>
+                  </div>
+                 </div><!-- Endof Header Row-->
+                 <div class="row"><!-- Start of Body Row-->
+                  <div class="modal-body">
+                    <div class="col-md-3">
+                      <label class="control-label" >Enter Card Amount:</label>
+                    </div>
+                    <div class="col-md-9">
+                      <input type="text" class="form-control " id="new_card_entry" value=""><i class="icon-sort"></i>
+                    </div>
+                  </div>
+                 </div><!-- Endof Body Row-->
+                 <div class="row"><!-- Start of Footer Row-->
+                  <div class="modal-footer">
+                  <input type="submit" class="btn btn-default" data-dismiss="modal" id="card_list" value="add">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                 </div><!-- Endof Footer Row-->
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+                
+ <!--End of Card Modal content-->             
+
+
+  
+  
+  <!--Expense Modal content-->
+   <div id="expense_popup" class="modal fade" role="dialog">
+           <div class="modal-dialog">
+
+            <!-- Modal content-->
+          <div class="modal-content">
+            <div class="container-fluid">
+              
+                <form class="form-horizontal" id="expense_form" role="form" action="" method="post">
+                 <div class="row">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Monthly Expense Sheet</h4>
+                  </div>
+                 </div>
+                <div class="modal-body">
+                  <div class="panel panel-info">
+                    <div class="panel-heading">
+
+                      <div class="row">
+                         <ul style="list-style-type:none">
+                             <div class=" col-md-1 expense-text">
+                              <li> Date <i class="icon-sort"></i></li>
+                             </div>
+                             <div class=" col-md-2 expense-text">
+                              <li> Maintainence <i class="icon-sort"></i></li>
+                             </div>
+                             <div class=" col-md-2 expense-text">
+                              <li> Bills <i class="icon-sort"></i></li>
+                             </div>
+                             <div class=" col-md-2 expense-text">
+                              <li> Inventory <i class="icon-sort"></i></li>
+                             </div>
+                             <div class=" col-md-1 expense-text">
+                              <li> Diesel <i class="icon-sort"></i></li>
+                             </div>
+                             <div class=" col-md-2 expense-text">
+                              <li> Salary <i class="icon-sort"></i></li>
+                             </div>
+                             
+                             <div class=" col-md-2 expense-text">
+                              <li> Bulk <i class="icon-sort"></i></li>
+                             </div>
+                             
+                             
+                        </ul>
+                    </div>
+                  </div>
+                  <div class="panel-body">
+                    <div class="row">
+                     
+                      {% for expense in Expense_list %}
+
+                        <ul style="list-style-type:none">
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" name="" size="1" value="{{ expense.date_expense }}"><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" name="" size="1" value="{{ expense.maintainence_expense }}" ><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" name="" size="1" value="{{ expense.maintainence_text_expense }}"><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" name="" size="1" value="{{ expense.bills_expense }}"><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" name="" size="1" value="{{ expense.bills_text_expense }}"><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" name="" size="1" value="{{ expense.inventory_expense }}"><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" name="" size="1" value="{{ expense.inventory_text_expense }}"><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" name="" size="1" value="{{ expense.diesel_expense }}"><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" name="" size="1" value="{{ expense.salary_expense }}"><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" name="" size="1" value="{{ expense.salary_text_expense }}"><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" name="" size="1" value="{{ expense.bulk_expense }}"><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" name="" size="1" value="{{ expense.bulk_text_expense }}"><i class="icon-sort"></i></li>
+                             </div>
+                       </ul>                       
+                      {% endfor %}
+                    </div>
+                    <br>
+                    <div class="row">
+
+                        <ul style="list-style-type:none">
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" id="form_date_expense" size="1" ><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" id="form_maintainence_expense" size="1" ><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" id="form_maintainence_text_expense" size="1" ><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" id="form_bills_expense" size="1" ><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" id="form_bills_text_expense" size="1" ><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" id="form_inventory_expense" size="1" ><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" id="form_inventory_text_expense" size="1" ><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" id="form_diesel_expense" size="1" ><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" id="form_salary_expense" size="1" ><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" id="form_salary_text_expense" size="1" ><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" id="form_bulk_expense" size="1" ><i class="icon-sort"></i></li>
+                             </div>
+                             <div class="col-md-1">
+                              <li> <input type="text" class="form-control input-sm" id="form_bulk_text_expense" size="1" ><i class="icon-sort"></i></li>
+                             </div>
+                       </ul>                       
+                       
+                    </div>
+                  </div>
+                </div>
+                    <br><br>    
+                <div class="modal-footer">
+                  <input type="submit" class="btn btn-default" data-dismiss="modal" id="expense_list" value="add">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+               </form>
+             </div>
+           </div>
+          </div>
+        <!--end of Expense Modal-->
+
+<script>
+var inv_counter = 1;
+
+
+$(function(){
+       $('#ac_total_list').click('submit', function(e){
+            e.preventDefault();
+            console.log(parseInt(document.getElementById('cash_entry').value));
+            console.log(parseInt(document.getElementById('card_entry').value));
+            console.log(parseInt(document.getElementById('counter_entry').value));
+            console.log(parseInt(document.getElementById('bank_entry').value));
+            console.log(parseInt(document.getElementById('expense_amt').value));
+            console.log(parseInt(document.getElementById('daily_total').value));
+            console.log(parseInt(document.getElementById('ota_rev').value));
+            console.log(parseInt(document.getElementById('total_rev_entry').value));
+            console.log(parseInt(document.getElementById('actual_rev_entry').value));
+            $.ajax({
+                url: '/dailyacs/calculatetotal/',
+                type: "POST",
+ //               data: $('#ac_form').serialize(),
+
+                data : {
+                  new_ota_rev_entry1:$('#new_ota_rev_entry1').val(),
+                  dropdownMenu1:$('#dropdownMenu1').val(),
+                  new_ota_rev_entry2:$('#new_ota_rev_entry2').val(),
+                  dropdownMenu2:$('#dropdownMenu2').val(),
+                  new_ota_rev_entry3:$('#new_ota_rev_entry3').val(),
+                  dropdownMenu3:$('#dropdownMenu3').val(),
+                  new_ota_rev_entry4:$('#new_ota_rev_entry4').val(),
+                  dropdownMenu4:$('#dropdownMenu4').val(),      
+                  form_bills_expense:$('#form_bills_expense').val(),
+                  form_inventory_expense:$('#form_inventory_expense').val(),
+                  form_maintainence_expense:$('#form_maintainence_expense').val(),
+                  form_diesel_expense:$('#form_diesel_expense').val(),
+                  form_salary_expense:$('#form_salary_expense').val(),
+                  form_bulk_expense:$('#form_bulk_expense').val(),
+                  form_date_expense:$('#form_date_expense').val(),
+                  form_maintainence_text_expense:$('#form_maintainence_text_expense').val(),
+                  form_bills_text_expense:$('#form_bills_text_expense').val(),
+                  form_inventory_text_expense:$('#form_inventory_text_expense').val(),
+                  form_salary_text_expense:$('#form_salary_text_expense').val(),
+                  form_bulk_text_expense:$('#form_bulk_text_expense').val(),
+                  cash_entry:$('#cash_entry').val(),
+                  card_entry:$('#card_entry').val(),
+                  counter_entry:$('#counter_entry').val(),
+                  bank_entry:$('#bank_entry').val(),
+                  expense_amt:$('#expense_amt').val(),
+                  daily_total:$('#daily_total').val(),
+                  ota_rev:$('#ota_rev').val(),
+                  total_rev_entry:$('#total_rev_entry').val(),
+                  actual_rev_entry:$('#actual_rev_entry').val(),
+
+                },
+                success: function(data){
+                    alert("Successfully submitted.")
+                }
+            });
+       }); 
+    });
+
+
+
+
+    var date_flag = 0;
+var date_day_val = 0;
+var date_month_val = 0;
+
+//Enter Date and Submi it
+$(function(){
+       $("#submit_date").click('submit', function(e){
+        e.preventDefault();
+            console.log(9000000000);
+         //   var submit_date_field = new Date();
+         //   console.log(submit_date_field);
+       var submit_date_field=document.getElementById('choose_date1').value;
+      var  submit_date_field_value= new Date(submit_date_field);
+            console.log(submit_date_field_value);
+        //  date_day=submit_date_field_value.getDate();
+          //date_month=submit_date_field_value.getMonth();
+          //date_month=date_month+1;
+            console.log(date_day_val);
+            console.log(date_month_val);
+            date_flag=1;
+            date_day_val = 25;
+            date_month_val = 4;
+            console.log(date_flag);
+
+
+ $.ajax({
+                url: "" ,
+                type: 'POST' ,
+                data : {
+                  flag : date_flag,
+                  date_day1 : date_day_val,
+                 date_month1 : date_month_val,
+
+                },
+                success: function(data){
+                    alert("Successfully submitted excel.")
+                    alert(date_flag)
+                    date_flag=0;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+           console.log(xhr.status);
+           console.log(xhr.responseText);
+           console.log(thrownError);
+                }
+            });
+       }); 
+
+   });
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+
+//OTA Rev dropdown click
+
+$(".dropdown_menu_list li").click(function(e) 
+   {  e.preventDefault();
+    var flag=0;
+      console.log($(this).text());
+console.log($(this).parents('.dropdown').find('.dropdown_list').val($(this).text()));
+});
+
+    
+
+
+var ota_rev_total = 0;
+$(document).ready(function(){
+       $('#ota_rev_list').click(function(){
+            console.log(8000000000);
+ console.log(parseInt(document.getElementById('cash_entry').value));
+            console.log(parseInt(document.getElementById('card_entry').value));
+            console.log(parseInt(document.getElementById('counter_entry').value));
+            console.log(parseInt(document.getElementById('bank_entry').value));
+            console.log(parseInt(document.getElementById('expense_amt').value));
+            console.log(parseInt(document.getElementById('daily_total').value));
+            console.log(parseInt(document.getElementById('ota_rev').value));
+            console.log(parseInt(document.getElementById('total_rev_entry').value));
+            console.log(parseInt(document.getElementById('actual_rev_entry').value));
+           
+            ota_rev_total={{db_ota_rev_total}} + parseInt(document.getElementById('new_ota_rev_entry1').value) + parseInt(document.getElementById('new_ota_rev_entry2').value)+ parseInt(document.getElementById('new_ota_rev_entry3').value) + parseInt(document.getElementById('new_ota_rev_entry4').value) ;
+         
+            document.getElementById('ota_rev').value = ota_rev_total;
+           ota_rev_total=0;
+ 
+       }); 
+    });
+
+
+
+
+var expense_total = 0;
+$(document).ready(function(){
+       $('#expense_list').click(function(){
+            console.log(7000000000);
+
+           
+            expense_total={{total_expense}}+parseInt(document.getElementById('form_maintainence_expense').value) + parseInt(document.getElementById('form_bills_expense').value)+ parseInt(document.getElementById('form_inventory_expense').value) + parseInt(document.getElementById('form_diesel_expense').value)+ parseInt(document.getElementById('form_salary_expense').value)+ parseInt(document.getElementById('form_bulk_expense').value) ;
+         
+            document.getElementById('expense_amt').value = expense_total;
+           expense_total=0;
+ 
+       }); 
+    });
+
+
+var actual_total = 0;
+$(document).ready(function(){
+       $('#cal_actual_rev').click(function(){
+            console.log(7000000000);
+
+           
+            actual_total=parseInt(document.getElementById('cash_entry').value) + parseInt(document.getElementById('card_entry').value)+ parseInt(document.getElementById('counter_entry').value) + parseInt(document.getElementById('bank_entry').value)+ parseInt(document.getElementById('expense_amt').value);
+         
+            document.getElementById('actual_rev_entry').value = actual_total;
+           actual_total=0;
+ 
+       }); 
+    });
+
+
+var total_total = 0;
+$(document).ready(function(){
+       $('#cal_total_rev').click(function(){
+            console.log(7000000000);
+
+           
+            total_total=parseInt(document.getElementById('daily_total').value) + parseInt(document.getElementById('ota_rev').value) ;
+         
+            document.getElementById('total_rev_entry').value = total_total;
+           total_total=0;
+ 
+       }); 
+    });
+
+
+
+var cash_total = 0;
+$(document).ready(function(){
+       $('#cash_list').click(function(){
+            console.log(5000000000);
+
+           
+            cash_total={{db_cash_total }} + parseInt(document.getElementById('new_cash_entry').value) ;
+         
+            document.getElementById('cash_entry').value = cash_total;
+           
+ 
+       }); 
+    });
+
+var card_total = 0;
+$(document).ready(function(){
+       $('#card_list').click(function(){
+            console.log(6000000000);
+           
+            card_total={{db_card_total }} + parseInt(document.getElementById('new_card_entry').value) ;
+         
+            document.getElementById('card_entry').value = card_total;
+           
+ 
+       }); 
+    });
+(function($) {
+    $.fn.goto = function() {
+        $('html, body').animate({
+            scrollTop: $(this).offset().top + 'px'
+        }, 'fast');
+        return this; // for chaining...
+    }
+})(jQuery);
+
+var adv_counter=1;
+$(document).ready(function(){
+    $("#add_adv").click(function(e){
+       e.preventDefault();/*
+        var newdiv = document.createElement('div');
+        newdiv.innerHTML =" <br><input type='text' class='form-control' name='advance_no[]'> <input type='text' class='form-control' name='advance_amt[]'>";
+        document.getElementById('dynamic_input_adv').appendChild(newdiv);*/
+        var text2=" <br><input type='text' class='form-control' name='advance_no[]'> <input type='text' class='form-control' name='advance_amt[]'>";
+       // document.getElementById('dynamic_input_inv').appendChild(newdiv);
+        $('#dynamic_input_adv').append(text2);
+        adv_counter++;
+             
+    });
+
+$(document).ready(function(){
+    $("#add_inv").click(function(e){
+       e.preventDefault();
+        
+        var text1=" <br><input type='text' class='form-control' name='invoice_no[]'> <input type='text' class='form-control' name='invoice_amt[]'>";
+       // document.getElementById('dynamic_input_inv').appendChild(newdiv);
+        $('#dynamic_input_inv').append(text1);
+        inv_counter++;
+             
+    });
+});
+
+
+});
+var total = 0;
+var i;
+$(document).ready(function(){
+    $("#base").click(function(){
+        $("#top").slideToggle("fast");
+    });
+});
+var x=adv_counter;
+var y=inv_counter;
+$(document).ready(function(){
+    $("#cal_daily_total").click(function(){
+      console.log(total);
+     adv_counter = adv_counter + {{ adv_excel_counter }} - 1;
+     inv_counter = inv_counter + {{ inv_excel_counter }} - 1;
+      for (i = 0; i < adv_counter; i++) { 
+        if(isNaN(parseInt(document.getElementsByName('advance_amt[]')[i].value))){}
+        else{
+            total=total + parseInt(document.getElementsByName('advance_amt[]')[i].value);
+   }}
+console.log(total);
+    for (i = 0; i < inv_counter; i++) { 
+      if(isNaN(parseInt(document.getElementsByName('invoice_amt[]')[i].value))){}
+      else{
+        console.log(total);
+          total=total + parseInt(document.getElementsByName('invoice_amt[]')[i].value);
+   }}
+   console.log(total);
+  document.getElementById('daily_total').value = total;
+  total=0;
+  adv_counter = x;
+  inv_counter = y;
+    });
+});
+
+
+</script>
+
+   	 {% endblock %}

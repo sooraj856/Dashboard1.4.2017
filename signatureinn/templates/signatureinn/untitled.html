@@ -1,0 +1,62 @@
+$(function(){
+       $('#ota_rev_list').click('submit', function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "",
+                type: "POST",
+                data: $('#ota_rev_form').serialize(),
+                success: function(data){
+                    alert("Successfully submitted.")
+                }
+            });
+       }); 
+    });
+<td class='header'>task.task_duration<i class='icon-sort'></i></td> <td class='header'>task.task_category <i class='icon-sort'></i></td> <td class='header'>task.task_project<i class='icon-sort'></i></td> <td class='header'>task.task_priority<i class='icon-sort'></i></td>
+                                <td class='header'>task.task_category <i class='icon-sort'></i></td> </tr>
+
+var actual_total = 0;
+$(document).ready(function(){
+       $('#cal_actual_rev').click(function(){
+            console.log(7000000000);
+
+           
+            actual_total=parseInt(document.getElementById('form_maintainence_expense').value) + parseInt(document.getElementById('form_bills_expense').value)+ parseInt(document.getElementById('form_inventory_expense').value) + parseInt(document.getElementById('form_diesel_expense').value)+ parseInt(document.getElementById('form_salary_expense').value)+ parseInt(document.getElementById('form_bulk_expense').value) ;
+         
+            document.getElementById('actual_rev_entry').value = actual_total;
+           
+ 
+       }); 
+    });
+<select class="sel_list_item" >
+                                  <option value="Yet To Start">Yet To Start</option>
+                                  <option value="Started">Started</option>
+                                  <option value="Paused">Paused</option>
+                                  <option value="Follow Up">Follow Up</option>
+                                  <option value="Completed">Completed</option>
+                                </select>
+     console.log(parseInt(document.getElementById('cash_entry').value));
+            console.log(parseInt(document.getElementById('card_entry').value));
+            console.log(parseInt(document.getElementById('counter_entry').value));
+            console.log(parseInt(document.getElementById('bank_entry').value));
+            console.log(parseInt(document.getElementById('expense_amt').value);
+            console.log(parseInt(document.getElementById('daily_total').value);
+            console.log(parseInt(document.getElementById('ota_rev').value);
+            console.log(parseInt(document.getElementById('total_rev_entry').value);
+            console.log(parseInt(document.getElementById('actual_rev_entry').value);
+
+
+
+<!--  <div class="row">
+        <div class="col-sm-3 col-md-2">
+          <ul class="">
+            <li class="active"><a href="/signatureinn/homepage/">The Signature Inn<span class="sr-only">(current)</span></a></li>
+            <li><a href="/todo/">To Do List</a></li>
+            <li><a href="/django_bootstrap_calendar/">Diary</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          {% block content %}
+          {% endblock %}  
+          
+        </div>
+      </div> -->

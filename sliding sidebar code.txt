@@ -1,0 +1,34 @@
+
+
+   <!-- Sliding div starts here -->
+     
+          <div  id="slider" style="left:-249px;">
+            <div id="sidebar-new" onclick="open_panel()">
+              hello
+            </div>
+            <div>
+              <h2>Contact Form</h2>
+              
+              <ul class="nav nav-sidebar">
+                <li class="active"><a href="/signatureinn/homepage/">The Signature Inn<span class="sr-only">(current)</span></a></li>
+                <li><a href="/todo/">To Do List</a></li>
+                <li><a href="/django_bootstrap_calendar/">Diary</a></li>
+              </ul>
+          </div>
+          </div>
+        
+           
+          
+        
+      
+          <!-- Sliding div ends here -->
+
+
+
+
+<button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon glyphicon-header" aria-hidden="true"></span>
+</button>
+glyphicon glyphicon-pencil
+glyphicon glyphicon-calendar
+glyphicon glyphicon-header

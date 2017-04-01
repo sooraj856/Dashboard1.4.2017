@@ -1,0 +1,81 @@
+{% extends "dash/index.html" %}
+ 
+     {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'dailyacs.css' %}" type="text/css" />
+   {% block content %}
+
+  <div class"container-fluid ">
+   	<div class="row feedback_body">
+   		<div class="col-sm-6 col-md-6">
+   				<h2>Advance Receipts
+          <button type="button" class="btn btn-info pull-right" id="add_adv">
+          <span class="glyphicon glyphicon-plus"></span>
+          </button>
+          </h2>
+   				<div class="table-responsive">
+   					<table class="table table-condensed table-striped">
+  						<thead>
+                            <tr>
+                              <th class=""> Bill No <i class="icon-sort"></i></th>
+                              <th class=""> Amount <i class="icon-sort"></i></th>                            
+                            </tr>
+                        </thead>
+                        <tbody>  
+                        	<tr>                                                      
+                              <td class=""><input type="text" class="form-control" name="room_count" value="{{ room_count}}"><i class="icon-sort"></i></td>                             
+                            </tr>                        
+                          
+                          {% for values in rm_num %}
+                          <div id="dynamic_rm_num">
+                            <tr>            
+                              <td class=""><input type="text" class="form-control" name="fb_num[]" value="{{ values.feedback }}"><i class="icon-sort"></i></td> 	                                          
+                              <td class=""><input type="text" class="form-control" name="rm_num[]" value="{{ values.room}}"><i class="icon-sort"></i></td> 
+                              <td class=""><input type="text" class="form-control" name="date_time[]" value="{{ values.date}}"><i class="icon-sort"></i></td> 
+                                                          
+                            </tr>  
+                          </div>                                                
+                         {% endfor %}                    
+                        </tbody>
+					 </table>
+				</div>
+   		</div>
+   		<div class="col-sm-6 col-md-6">
+   				<h2>Advance Receipts
+          <button type="button" class="btn btn-info pull-right" id="add_adv">
+          <span class="glyphicon glyphicon-plus"></span>
+          </button>
+          </h2>
+   				<div class="table-responsive">
+   					<table class="table table-condensed table-striped">
+  						<thead>
+                            <tr>
+                              <th class=""> Bill No <i class="icon-sort"></i></th>
+                              <th class=""> Amount <i class="icon-sort"></i></th>                            
+                            </tr>
+                        </thead>
+                        <tbody>  
+                        	<tr>                                                      
+                              <td class=""><input type="text" class="form-control" name="wn_room_count" value="{{ wn_room_count}}"><i class="icon-sort"></i></td>                             
+                            </tr>                        
+                          
+                          {% for value in wn_num %}
+                          <div id="dynamic_wn_rm_num">
+                            <tr>            
+                              	                                          
+                              <td class=""><input type="text" class="form-control" name="wn_rm_num[]" value="{{ value.room}}"><i class="icon-sort"></i></td> 
+                              <td class=""><input type="text" class="form-control" name="date_time[]" value="{{ value.date}}"><i class="icon-sort"></i></td>
+                              <td class=""><input type="text" class="form-control" name="email[]" value="{{ value.email}}"><i class="icon-sort"></i></td>
+                               
+                                                          
+                            </tr>  
+                          </div>                                                
+                         {% endfor %}                    
+                        </tbody>
+					 </table>
+				</div>
+   		</div>
+   	</div>
+   </div>
+
+
+   {% endblock %}

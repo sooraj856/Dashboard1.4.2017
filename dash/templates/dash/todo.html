@@ -1,0 +1,1385 @@
+   {% extends "dash/index.html" %}
+
+
+   {% block content %}
+   
+
+
+          <div class="row placeholder page-header">
+            <div class="col-xs-12 col-sm-6 placeholder">
+              <div class="panel panel-primary panelbg">
+                <div class="panel-heading text-center">
+                 <strong>Todo List</strong>                  
+                  <button class="btn btn-default btn-sm pull-right" data-toggle="modal" data-target="#add_task_popup">Add task</button>
+                </div>
+                <div class="panel-body">
+                   <div class="table-responsive table_list_body">
+                        <table class="table table-condensed table-hover table-striped tablesorter ">
+                          <thead class="table_head">
+                            <tr>
+                              <th class="header"> Task <i class="icon-sort"></i></th>
+                              <th class="header"> Project <i class="icon-sort"></i></th>
+                              <th class="header"> Priority <i class="icon-sort"></i></th>
+                              <th class="header"> Duration <i class="icon-sort"></i></th>
+                              <th class="header"> Actual   <i class="icon-sort"></i></th>
+                              <th class="header"> Status <i class="icon-sort"></i></th>
+                            </tr>
+                          </thead>
+                        <tbody class="">
+                         <div>
+                         {% for task in task_item_inst_list %}
+                          
+                            
+                            <tr>
+                              <td class="task_row" id="{{task.id}}">{{ task.task_name }}<i class="icon-sort"></i></td>
+                              <td>{{ task.task_project }}<i class="icon-sort"></i></td>
+                              <td>{{ task.task_priority }}<i class="icon-sort"></i></td>
+                              <td>{{ task.task_duration }}<i class="icon-sort"></i></td>
+                              <td>
+                              <div class="btn-group btn-group-xs controls" role="group" aria-label="..." id="">
+                                  <button type="button" class="btn btn-default btn-sm start_pause_resume" id=""><span class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
+                                  <button type="button" class="btn btn-default btn-sm reset" id=""><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>                                                   
+                              </div>
+
+                              <i class="icon-sort"></i></td>
+                              <td>
+                                  
+                                  <div class="dropdown">
+                                  
+                                    <input type="button" class="btn btn-default btn-xs dropdown-toggle dropdown_list " id="{{task.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="{{ task.task_status }}">
+                                 
+                                    <ul class="dropdown-menu dropdown_menu_list dropdown-menu-right" aria-labelledby="">
+                                      <li><a href="">Yet To Start</a></li>
+                                      <li><a href="">Started</a></li>
+                                      <li><a href="">Paused</a></li>
+                                      <li><a href="">Follow Up</a></li>
+                                      
+                                      <li><a href="">Completed</a></li>
+                                    </ul>
+                                  </div>          
+                                  
+                                                    
+                                                               
+                             <i class="icon-sort"></i></td>
+                            </tr>
+                           
+                          
+                        {% endfor %}  
+                            <tr class="list_items">
+
+                            
+                            </tr>
+                            
+                         </div>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+              </div>       
+            </div>
+           
+            <div class="col-xs-12 col-sm-6 placeholder">
+              <!--Email-->   
+              <div class="row"> 
+                <div class="col-xs-24 col-sm-12 placeholder">        
+                  <div class="panel panel-primary panelbghalf">
+                    <div class="panel-heading text-center">
+                        <strong>Email</strong>
+                    </div>
+                    <div class="panel-body">
+                      <div class="table-responsive">
+                        <table class="table table-condensed table-hover table-striped tablesorter">
+                          <thead class="table_head">
+                             <tr>
+                              <th class="header"> Task <i class="icon-sort"></i></th>
+                              <th class="header"> Project <i class="icon-sort"></i></th>
+                              <th class="header"> Priority <i class="icon-sort"></i></th>
+                              <th class="header"> Duration <i class="icon-sort"></i></th>
+                              <th class="header"> Actual <i class="icon-sort"></i></th>
+                              <th class="header"> Status <i class="icon-sort"></i></th>
+                            </tr>
+                          </thead>
+                        <tbody>
+                         <div>
+                         {% for task in task_item_inst_email %}
+                            <tr>
+                              <td class="email_row" id="{{task.id}}">{{ task.task_name }}<i class="icon-sort"></i></td>
+                              <td>{{ task.task_project }}<i class="icon-sort"></i></td>
+                              <td>{{ task.task_priority }}<i class="icon-sort"></i></td>
+                              <td>{{ task.task_duration }}<i class="icon-sort"></i></td>
+                              <td>
+                              <div class="btn-group btn-group-xs controls" role="group" aria-label="..." id="">
+                                  <button type="button" class="btn btn-default btn-sm start_pause_resume" id=""><span class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
+                                  <button type="button" class="btn btn-default btn-sm reset" id=""><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>                                                   
+                              </div>
+                              <i class="icon-sort"></i></td>
+                              <td>
+                                  
+                                  <div class="dropdown">
+                                    <input type="button" class="btn btn-default btn-xs dropdown-toggle dropdown_email " id="{{task.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="{{ task.task_status }}">
+                                 
+                                    <ul class="dropdown-menu dropdown_menu_email dropdown-menu-right" aria-labelledby="">
+                                      <li><a href="">Yet To Start</a></li>
+                                      <li><a href="">Started</a></li>
+                                      <li><a href="">Paused</a></li>
+                                      <li><a href="">Follow Up</a></li>
+                                      
+                                      <li><a href="">Completed</a></li>
+                                    </ul>
+                                  </div>          
+                                  
+                                                    
+                                                               
+                             <i class="icon-sort"></i></td>
+                            </tr>
+                           
+                          
+                        {% endfor %}  
+                        <tr class="email_items">
+                            
+                        </tr>
+                         </div>   
+                        </tbody>
+                        </table>
+                    </div>
+                        </div>                  
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-24 col-sm-12 placeholder">        
+                    <div class="panel panel-primary panelbghalf">
+                        <div class="panel-heading text-center">
+                         <strong>Calls</strong>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                        <table class="table table-condensed table-hover table-striped tablesorter">
+                          <thead>
+                             <tr>
+                              <th class="header"> Task <i class="icon-sort"></i></th>
+                              <th class="header"> Project <i class="icon-sort"></i></th>
+                              <th class="header"> Priority <i class="icon-sort"></i></th>
+                              <th class="header"> Duration <i class="icon-sort"></i></th>
+                              <th class="header"> Actual <i class="icon-sort"></i></th>
+                              <th class="header"> Status <i class="icon-sort"></i></th>
+                            </tr>
+                          </thead>
+                        <tbody>
+                          <div>
+                  
+                         {% for task in task_item_inst_calls %}
+                            <tr>
+                              <td class="calls_row" id="{{task.id}}">{{ task.task_name }}<i class="icon-sort"></i></td>
+                              <td>{{ task.task_project }}<i class="icon-sort"></i></td>
+                              <td>{{ task.task_priority }}<i class="icon-sort"></i></td>
+                              <td>{{ task.task_duration }}<i class="icon-sort"></i></td>
+                              <td>
+                              <div class="btn-group btn-group-xs controls" role="group" aria-label="..." id="">
+                                  <button type="button" class="btn btn-default btn-sm start_pause_resume" id=""><span class="glyphicon glyphicon-play" aria-hidden="true"></span></button>
+                                  <button type="button" class="btn btn-default btn-sm reset" id=""><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>                                                   
+                              </div>
+                              <i class="icon-sort"></i></td>
+                              <td>
+                                  
+                                  <div class="dropdown">
+                                    <input type="button" class="btn btn-default btn-xs dropdown-toggle dropdown_calls " id="{{task.id}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="{{ task.task_status }}">
+                                 
+                                    <ul class="dropdown-menu dropdown_menu_calls dropdown-menu-right" aria-labelledby="">
+                                      <li><a href="">Yet To Start</a></li>
+                                      <li><a href="">Started</a></li>
+                                      <li><a href="">Paused</a></li>
+                                      <li><a href="">Follow Up</a></li>
+                                      
+                                      <li><a href="">Completed</a></li>
+                                    </ul>
+                                  </div>          
+                                  
+                                                    
+                                                               
+                             <i class="icon-sort"></i></td>
+                            </tr>
+                           
+                          
+                        {% endfor %} 
+                        <tr class="calls_items">
+                            
+                        </tr>
+                             
+                          </div>
+                        </tbody>
+                        </table>
+                    </div>
+                        </div>                  
+                    </div>                    
+                </div>
+              </div>  
+            </div>
+          </div>
+
+
+           <!-- Modal add task popup -->
+          <div id="add_task_popup" class="modal fade" role="dialog">
+           <div class="modal-dialog">
+
+            <!-- Modal content-->
+             <div class="modal-content">
+              <form class="form-horizontal" id="task_form" role="form" action="" method="post">
+               {% csrf_token %}
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Add a New Task</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_name">Task:</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="task_name" id="task_name1" placeholder="Enter Task">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_date">Date:</label>
+                      <div class="col-lg-4"> 
+                        <input type="date" class="form-control" name="task_date" id="task_date1">
+                      </div>
+                      <label class="control-label col-lg-2" for="task_time">Time:</label>
+                      <div class="col-lg-4"> 
+                        <input type="time" class="form-control" name="task_time" id="task_time1">
+                      </div>
+                    </div>
+                    
+
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_duration">Duration:</label>
+                      <div class="col-lg-10"> 
+                        <input type="text" class="form-control" name="task_duration" id="task_duration1" placeholder="Enter Duration" value="0">
+                      </div>
+                    </div>
+                      <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_actual">Actual:</label>
+                      <div class="col-lg-10"> 
+                        <input type="text" class="form-control" name="task_actual" id="task_actual1" placeholder="Enter Duration" value="0">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_category">Choose Category:</label>
+                      <div class="col-lg-10"> 
+                      <select class="form-control" name="task_category" id="task_category1">
+                        <option value="Calls">Calls</option>
+                        <option value="Email">Email</option>
+                        <option value="List" selected>List</option>
+                      </select>
+                      </div>
+                    </div> 
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_project">Project:</label>
+                      <div class="col-lg-8"> 
+                        <select class="form-control" name="task_project" id="task_project1">
+                          <option value="Signature">Signature</option>
+                          <option value="Coffee">Coffee</option>
+                          <option value="Stocks" selected>Stocks</option>
+                        </select>
+                      </div>
+                      <div class="clearfix visible-xs"></div>
+                      <div class="col-lg-1"> 
+                        <button type="button" class="btn btn-info pull-left">
+                          <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_priority">Choose Priority:</label>
+                      <div class="col-lg-10"> 
+                      <select class="form-control" name="task_priority" id="task_priority1">
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low" selected>Low</option>
+                      </select>
+                      </div>
+                    </div> 
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_status">Choose Status:</label>
+                      <div class="col-lg-10"> 
+                      <select class="form-control" name="task_status" id="task_status1">
+                        <option value="Yet To Start" selected>Yet To Start</option>
+                        <option value="Started">Started</option>
+                        <option value="Paused">Paused</option>
+                        <option value="Follow Up">Follow Up</option>
+                        <option value="Completed">Completed</option>
+                      </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_note">Notes:</label>
+                      <div class="col-lg-10"> 
+                        
+                        <textarea class="form-control" rows="2" name="task_note" id="task_note1" value=""></textarea>
+                      </div> 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <input type="submit" class="btn btn-default" data-dismiss="modal" id="create_list" value="add">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+               </form>
+             </div>
+           </div>
+          </div>
+        <!--end of Modal-->
+
+
+
+        <!-- Modal Completed Task popup -->
+          <div id="completed_popup" class="modal fade" role="dialog">
+           <div class="modal-dialog">
+
+            <!-- Modal content-->
+             <div class="modal-content">
+              <div class="modal-body">
+                <h2>Are you Sure</h2>
+                <p>
+                  <input type="submit" class="btn btn-default" data-dismiss="modal" id="task_completed_yes" value="Yes">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </p>
+              </div>
+
+             </div>
+            </div>
+          </div>
+
+          <!--end of Modal-->
+
+
+
+          <!-- Edit Task popup -->
+          <div id="edit_popup" class="modal fade" role="dialog">
+           <div class="modal-dialog">
+
+            <!-- Modal content-->
+             <div class="modal-content">
+              <form class="form-horizontal" id="task_form_edit" role="form" action="" method="post">
+               {% csrf_token %}
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Update The Task</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_name_edit">Task:</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="task_name_edit" id="task_name_edit1" placeholder="Enter Task">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_date_edit">Date:</label>
+                      <div class="col-lg-4"> 
+                        <input type="date" class="form-control" name="task_date_edit" id="task_date_edit1">
+                      </div>
+                      <label class="control-label col-lg-2" for="task_time_edit">Time:</label>
+                      <div class="col-lg-4"> 
+                        <input type="time" class="form-control" name="task_time_edit" id="task_time_edit1">
+                      </div>
+                    </div>
+                    
+
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_duration_edit">Duration:</label>
+                      <div class="col-lg-10"> 
+                        <input type="text" class="form-control" name="task_duration_edit" id="task_duration_edit1" placeholder="Enter Duration">
+                      </div>
+                    </div>
+                      <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_actual_edit">Actual:</label>
+                      <div class="col-lg-10"> 
+                        <input type="text" class="form-control" name="task_actual_edit" id="task_actual_edit1" placeholder="Enter Duration">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_category_edit">Choose Category:</label>
+                      <div class="col-lg-10"> 
+                      <select class="form-control" name="task_category_edit" id="task_category_edit1">
+                        <option value="Calls">Calls</option>
+                        <option value="Email">Email</option>
+                        <option value="List" selected>List</option>
+                      </select>
+                      </div>
+                    </div> 
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_project_edit">Project:</label>
+                      <div class="col-lg-8"> 
+                        <select class="form-control" name="task_project_edit" id="task_project_edit1">
+                          <option value="Signature">Signature</option>
+                          <option value="Coffee">Coffee</option>
+                          <option value="Stocks" selected>Stocks</option>
+                        </select>
+                      </div>
+                      <div class="clearfix visible-xs"></div>
+                      <div class="col-lg-1"> 
+                        <button type="button" class="btn btn-info pull-left">
+                          <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_priority_edit">Choose Priority:</label>
+                      <div class="col-lg-10"> 
+                      <select class="form-control" name="task_priority_edit" id="task_priority_edit1">
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low" selected>Low</option>
+                      </select>
+                      </div>
+                    </div> 
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_status_edit">Choose Status:</label>
+                      <div class="col-lg-10"> 
+                      <select class="form-control" name="task_status_edit" id="task_status_edit1">
+                        <option value="Yet To Start" selected>Yet To Start</option>
+                        <option value="Started">Started</option>
+                        <option value="Paused">Paused</option>
+                        <option value="Follow Up">Follow Up</option>
+                        <option value="Completed">Completed</option>
+                      </select>
+                      </div>
+                    </div> 
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_note_edit">Notes:</label>
+                      <div class="col-lg-10"> 
+                        
+                        <textarea class="form-control" rows="2" name="task_note_edit" id="task_note_edit1" value=""></textarea>
+                      </div> 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <input type="submit" class="btn btn-default" data-dismiss="modal" id="edit_list" value="add">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+               </form>
+             </div>
+           </div>
+          </div>
+        <!--end of Modal-->
+
+
+         <!-- Modal Timer popup 
+          <div id="timer_popup" class="modal fade" role="dialog">
+           <div class="modal-dialog">
+
+            <!-- Modal content
+             <div class="modal-content">
+              <div class="modal-body">
+                <div id="time">
+                    <span id="hours">00</span> :
+                    <span id="minutes">00</span> :
+                    <span id="seconds">00</span> 
+                </div>
+                <div id="controls">
+                    <button id="start_pause_resume">Start</button>
+                    <button id="reset">Reset</button>
+                </div>
+              </div>
+
+             </div>
+            </div>
+          </div>
+
+          <!--end of Modal-->
+    
+
+
+
+
+<script type="text/javascript">
+
+
+$(function(){
+       $("#create_list").click('submit', function(f){
+           // f.preventDefault();
+          //this code is to append the new task created directly after collapsing the popup without refreshing
+            var text1="<td class='task_row'>"+ document.getElementById('task_name1').value + "<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_project1').value+"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_priority1').value +"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_duration1').value+ "<i class='icon-sort'></i></td><td><div class='btn-group btn-group-xs controls' role='group' aria-label='...'' id=''><button type='button' class='btn btn-default btn-sm start_pause_resume' id=''><span class='glyphicon glyphicon-play' aria-hidden='true'></span></button><button type='button' class='btn btn-default btn-sm reset' id=''><span class='glyphicon glyphicon-refresh' aria-hidden='true'></span></button><i class='icon-sort'></i></td><td><div class='dropdown'><input type='button' class='btn btn-default btn-xs dropdown-toggle dropdown_list ' id='' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' value='"+document.getElementById('task_status1').value+"'><ul class='dropdown-menu dropdown_menu_list dropdown-menu-right' aria-labelledby=''><li><a href=''>Yet To Start</a></li><li><a href=''>Started</a></li><li><a href=''>Paused</a></li><li><a href=''>Follow Up</a></li><li><a href=''>Completed</a></li></ul></div><i class='icon-sort'></i></td>";                                                                 
+            var next_line="<br>"  ; 
+            alert(document.getElementById('task_category1').value);
+            
+            if(document.getElementById("task_category1").value=="List") {                                               
+                           alert(document.getElementById('task_category1').value)  ;
+            $('.list_items').append(text1);
+          }
+            else if(document.getElementById('task_category1').value=='Email'){
+            $('.email_items').append(text1);}
+            else{
+            $('.calls_items').append(text1);}
+          //---------------------------------------------------------------------------------------------------------------------------------
+        //    $('.list_items').append(next_line);
+
+        // This section of the code is to send form data to the database
+            $.ajax({
+                url: "",
+                type: "POST",
+                data: $('#task_form').serialize(),
+                success: function(data){
+                    alert("Successfully submitted x.")
+                }
+            });
+       }); 
+       //----------------------------------------------------------------------------------------------------------------------------------
+    });
+/*
+  $(document).ready(function(){
+    var theText = "Yet to Start";
+     {% for task in task_item_inst_list %}
+    theText="{{ task.task_status }}";
+    $(".dropdown_list option:contains(" + theText + ")").attr('selected', 'selected');
+   /* $(".dropdown_list option").each(function() {
+  if($(this).text() == theText) {
+    $(this).attr('selected', 'selected');            
+  }                      
+});*/
+/*
+     {% endfor %}
+/*
+$('.sel_list_item').each(function() {
+  console.log(6000000000);
+   // var this = $(this);
+  //  this.val("Started");
+    console.log(6000000000);
+});
+
+});
+
+*/
+
+
+/*
+$( ".dropdown_list" ).change(function() {
+  console.log(5);
+  console.log($(".dropdown_list option:selected").text()[3]);
+ if($(".dropdown_list option:selected").text()=="Follow up"){
+   alert("Successfully submitted.");
+ }
+
+
+
+ console.log(69900000000);
+   $(this).attr('value' , $(this).val());
+  //  console.log($('#dropdown_list').text());
+});
+*/
+/*
+$( ".dropdown_list" ).click(function(f) {
+  console.log(8800000000);
+  var pos="";
+var pos = $(this);
+f.preventDefault();
+  $('li').click(function(e) 
+   {  e.preventDefault();
+  console.log(69900000000);
+   pos.attr('value' , $(this).text());
+    console.log($(this).html());
+    e.preventDefault();
+   
+});
+});*/
+
+//-----------------------------------------------------------------------------------------------------------------------------------//
+//function when status button for List Section is clicked//
+var completed_flag=0;
+
+$(".dropdown_menu_list li").click(function(e) 
+   {  e.preventDefault();
+    var flag=0;
+    
+   //   var x= $(this).parents(".dropdown").find('.dropdown_list').attr('id');
+  //console.log(x);
+    var a = '.' + $(this).text();
+    console.log("#"+$(this).text());
+    console.log("\'#"+$(this).text()+"\'");
+    console.log($(this).text());
+    var edit_id= $(this).parents(".dropdown").find('.dropdown_list').attr('id');
+ 
+// This section of the code is to assign the current data to the edit pop up form and call the Edit popup Modal when Follow Up is selected   
+
+$(this).parents('.dropdown').find('.dropdown_list').val($(this).text());
+if($(this).text()=="Follow Up"){
+  
+var obj=$(this).parents('tr');
+        console.log(edit_id);
+       // edit_id=1;
+      {% for task in task_item_inst_list %}
+      if({{task.id}}==edit_id){
+        $("#edit_popup #task_name_edit1").val( "{{task.task_name}}" );
+        $("#edit_popup #task_date_edit1").val( "{{task.task_date}}" );
+        $("#edit_popup #task_time_edit1").val( "{{task.task_time}}" );
+        $("#edit_popup #task_duration_edit1").val( "{{task.task_duration}}" );
+        $("#edit_popup #task_actual_edit1").val( "{{task.task_actual}}" );
+        $("#edit_popup #task_category_edit1").val( "{{task.task_category}}" );
+        $("#edit_popup #task_project_edit1").val( "{{task.task_project}}" );
+        $("#edit_popup #task_priority_edit1").val( "{{task.task_priority}}" );
+        $("#edit_popup #task_status_edit1").val( "{{task.task_status}}" );
+        $("#edit_popup #task_note_edit1").val( "{{task.task_note}}" );
+
+        $("#edit_popup").modal('show');
+//----------------------------------------------------------------------------------------------------------------------------------------
+        //this code is to append the edited task created directly after collapsing the popup without refreshing
+      $("#edit_list").click('submit', function(f1){
+            f1.preventDefault();
+            console.log(edit_id);
+            var text3="<td class='task_row'>"+ document.getElementById('task_name_edit1').value + "<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_project_edit1').value+"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_priority_edit1').value +"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_duration_edit1').value+ "<i class='icon-sort'></i></td><td><div class='btn-group btn-group-xs controls' role='group' aria-label='...'' id=''><button type='button' class='btn btn-default btn-sm start_pause_resume' id=''><span class='glyphicon glyphicon-play' aria-hidden='true'></span></button><button type='button' class='btn btn-default btn-sm reset' id=''><span class='glyphicon glyphicon-refresh' aria-hidden='true'></span></button><i class='icon-sort'></i></td><td><div class='dropdown'><input type='button' class='btn btn-default btn-xs dropdown-toggle dropdown_list ' id='' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' value='"+document.getElementById('task_status_edit1').value+"'><ul class='dropdown-menu dropdown_menu_list dropdown-menu-right' aria-labelledby=''><li><a href=''>Yet To Start</a></li><li><a href=''>Started</a></li><li><a href=''>Paused</a></li><li><a href=''>Follow Up</a></li><li><a href=''>Completed</a></li></ul></div><i class='icon-sort'></i></td>";                                                                 
+           obj.html(text3);  
+            console.log($('#task_name_edit1').val());                                                 
+                             
+           //------------------------------------------------------------------------------------------------------------------------------
+           // This section of the code is to send edited form data to the database 
+            $.ajax({
+                url: '/todo/taskedit/',
+                type: 'POST',
+                data: {
+                  
+                  id:edit_id,
+                  
+                  task_name_edit:$('#task_name_edit1').val(),
+                  task_duration_edit:$('#task_duration_edit1').val(),
+                  task_actual_edit:$('#task_actual_edit1').val(),
+                  task_category_edit:$('#task_category_edit1').val(),
+                  task_project_edit:$('#task_project_edit1').val(),
+                  task_priority_edit:$('#task_priority_edit1').val(),
+                  task_status_edit:$('#task_status_edit1').val(),
+                  task_date_edit:$('#task_date_edit1').val(),
+                  task_time_edit:$('#task_time_edit1').val(),
+                  task_note_edit:$('#task_note_edit1').val(),
+              
+
+                },
+                success: function(data){
+                    alert("Successfully.followup list")
+                }
+            });
+            //------------------------------------------------------------------------------------------------------------------------------
+       }); 
+       
+     }
+
+
+      
+      {% endfor %} 
+}
+else if($(this).text()=="Completed"){
+completed_flag=edit_id;
+//alert(completed_flag);
+$("#completed_popup").modal('show'); 
+}
+  //   $('#Started').val($(this).text());
+/*
+$.post("",
+    {
+        task_status_change:$(this).text() ,
+        flag:1,
+        task_id:$(this).parents(".dropdown").find('.dropdown_list').attr('id')
+    },
+function(data, status){
+  
+  console.log(flag);
+        alert("\nStatus: " + status);
+  });
+*/
+
+//alert($(this).text());
+//alert($(this).parents(".dropdown").find('.dropdown_list').attr('id'));
+  $.ajax({
+                url: '/todo/statuschange/',
+                type: 'POST',
+                data: {
+                  
+                  task_status_change:$(this).text(),
+                  flag:1,
+                  task_id:edit_id,
+                                             
+              
+
+                },
+                success: function(data){
+                    alert("Successfully.statuschange")
+                   // completed_flag=0;
+                    flag=0;
+                }
+            });
+
+    console.log(flag);
+    /*
+    var x= $(".dropdown_list").attr('id');
+  console.log(x);
+   $(".dropdown_list").slice(x).attr('value' , $(this).text());
+    console.log($(this).html());
+    e.preventDefault();
+   */
+});
+
+//function for clicking yes for completed popup//
+$(function(){
+       $("#task_completed_yes").click('submit', function(f){
+            f.preventDefault();
+          
+           
+            $.ajax({
+                url: '/todo/statuscompleted/',
+                type: 'POST',
+                data: {
+                       flag_completed:completed_flag, 
+                                                           
+              
+
+                },
+                success: function(data){
+                    alert("Successfully. statuscompleted")
+                }
+            });
+            completed_flag=0;
+            alert(completed_flag);
+       }); 
+    });
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------//
+//function when status button for Emails Section is clicked//
+var completed_flag2=0;
+
+$(".dropdown_menu_email li").click(function(e2) 
+   {  e2.preventDefault();
+    var flag=0;
+    
+   //   var x= $(this).parents(".dropdown").find('.dropdown_list').attr('id');
+  //console.log(x);
+    var a = '.' + $(this).text();
+    console.log("#"+$(this).text());
+    console.log("\'#"+$(this).text()+"\'");
+    console.log($(this).text());
+    var edit_id= $(this).parents(".dropdown").find('.dropdown_email').attr('id');
+     var edit_task_category= $(this).parents(".dropdown").attr('id');
+    console.log(edit_task_category);
+   
+
+$(this).parents('.dropdown').find('.dropdown_email').val($(this).text());
+if($(this).text()=="Follow Up"){
+  
+var obj=$(this).parents('tr');
+        console.log(edit_id);
+       // edit_id=1;
+      {% for task in task_item_inst_email %}
+      if({{task.id}}==edit_id){
+        $("#edit_popup #task_name_edit1").val( "{{task.task_name}}" );
+        $("#edit_popup #task_date_edit1").val( "{{task.task_date}}" );
+        $("#edit_popup #task_time_edit1").val( "{{task.task_time}}" );
+        $("#edit_popup #task_duration_edit1").val( "{{task.task_duration}}" );
+        $("#edit_popup #task_actual_edit1").val( "{{task.task_actual}}" );
+        $("#edit_popup #task_category_edit1").val( "{{task.task_category}}" );
+        $("#edit_popup #task_project_edit1").val( "{{task.task_project}}" );
+        $("#edit_popup #task_priority_edit1").val( "{{task.task_priority}}" );
+        $("#edit_popup #task_status_edit1").val( "{{task.task_status}}" );
+         $("#edit_popup #task_note_edit1").val( "{{task.task_note}}" );
+        $("#edit_popup").modal('show');
+
+
+      $("#edit_list").click('submit', function(f2){
+            f2.preventDefault();
+            console.log(edit_id);
+            var text3="<td class='email_row'>"+ document.getElementById('task_name_edit1').value + "<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_project_edit1').value+"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_priority_edit1').value +"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_duration_edit1').value+ "<i class='icon-sort'></i></td><td><div class='btn-group btn-group-xs controls' role='group' aria-label='...'' id=''><button type='button' class='btn btn-default btn-sm start_pause_resume' id=''><span class='glyphicon glyphicon-play' aria-hidden='true'></span></button><button type='button' class='btn btn-default btn-sm reset' id=''><span class='glyphicon glyphicon-refresh' aria-hidden='true'></span></button><i class='icon-sort'></i></td><td><div class='dropdown'><input type='button' class='btn btn-default btn-xs dropdown-toggle dropdown_email ' id='' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' value='"+document.getElementById('task_status_edit1').value+"'><ul class='dropdown-menu dropdown_menu_email dropdown-menu-right' aria-labelledby=''><li><a href=''>Yet To Start</a></li><li><a href=''>Started</a></li><li><a href=''>Paused</a></li><li><a href=''>Follow Up</a></li><li><a href=''>Completed</a></li></ul></div><i class='icon-sort'></i></td>";                                                                 
+           obj.html(text3);  
+            console.log($('#task_name_edit1').val());                                                 
+                             
+            
+            $.ajax({
+                url: '/todo/taskedit/',
+                type: 'POST',
+                data: {
+                  
+                  id:edit_id,
+                  
+                  task_name_edit:$('#task_name_edit1').val(),
+                  task_duration_edit:$('#task_duration_edit1').val(),
+                  task_actual_edit:$('#task_actual_edit1').val(),
+                  task_category_edit:$('#task_category_edit1').val(),
+                  task_project_edit:$('#task_project_edit1').val(),
+                  task_priority_edit:$('#task_priority_edit1').val(),
+                  task_status_edit:$('#task_status_edit1').val(),
+                  task_date_edit:$('#task_date_edit1').val(),
+                  task_time_edit:$('#task_time_edit1').val(),
+                  task_note_edit:$('#task_note_edit1').val(),
+              
+
+                },
+                success: function(data){
+                    alert("Successfully.taskedit")
+                }
+            });
+       }); 
+       
+     }
+
+
+      
+      {% endfor %} 
+}
+else if($(this).text()=="Completed"){
+completed_flag2=edit_id;
+alert(completed_flag2);
+$("#completed_popup").modal('show'); 
+}
+  //   $('#Started').val($(this).text());
+/*
+$.post("",
+    {
+        task_status_change:$(this).text() ,
+        flag:1,
+        task_id:$(this).parents(".dropdown").find('.dropdown_list').attr('id')
+    },
+function(data, status){
+  
+  console.log(flag);
+        alert("\nStatus: " + status);
+  });
+*/
+
+alert($(this).text());
+alert($(this).parents(".dropdown").find('.dropdown_email').attr('id'));
+  $.ajax({
+                url: '/todo/statuschange/',
+                type: 'POST',
+                data: {
+                  
+                  task_status_change:$(this).text(),
+                  flag:1,
+                  task_id:edit_id,
+                                             
+              
+
+                },
+                success: function(data){
+                    alert("Successfully.statuschange")
+                   // completed_flag=0;
+                    flag=0;
+                }
+            });
+
+    console.log(flag);
+    /*
+    var x= $(".dropdown_list").attr('id');
+  console.log(x);
+   $(".dropdown_list").slice(x).attr('value' , $(this).text());
+    console.log($(this).html());
+    e.preventDefault();
+   */
+});
+
+//function for clicking yes for completed popup//
+$(function(){
+       $("#task_completed_yes").click('submit', function(f){
+            f.preventDefault();
+          
+           
+            $.ajax({
+                url: '/todo/statuscompleted/',
+                type: 'POST',
+                data: {
+                       flag_completed:completed_flag2, 
+                                                           
+              
+
+                },
+                success: function(data){
+                    alert("Successfully. statuscompleted")
+                }
+            });
+            completed_flag2=0;
+            
+       }); 
+    });
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------//
+//function when status button for Calls Section is clicked//
+var completed_flag3=0;
+
+$(".dropdown_menu_calls li").click(function(e3) 
+   {  e3.preventDefault();
+    var flag=0;
+    
+   //   var x= $(this).parents(".dropdown").find('.dropdown_list').attr('id');
+  //console.log(x);
+    var a = '.' + $(this).text();
+    console.log("#"+$(this).text());
+    console.log("\'#"+$(this).text()+"\'");
+    console.log($(this).text());
+    var edit_id= $(this).parents(".dropdown").find('.dropdown_calls').attr('id');
+    
+   
+
+$(this).parents('.dropdown').find('.dropdown_calls').val($(this).text());
+if($(this).text()=="Follow Up"){
+  
+var obj=$(this).parents('tr');
+        console.log(edit_id);
+       // edit_id=1;
+      {% for task in task_item_inst_calls %}
+      if({{task.id}}==edit_id){
+        $("#edit_popup #task_name_edit1").val( "{{task.task_name}}" );
+        $("#edit_popup #task_date_edit1").val( "{{task.task_date}}" );
+        $("#edit_popup #task_time_edit1").val( "{{task.task_time}}" );
+        $("#edit_popup #task_duration_edit1").val( "{{task.task_duration}}" );
+        $("#edit_popup #task_actual_edit1").val( "{{task.task_actual}}" );
+        $("#edit_popup #task_category_edit1").val( "{{task.task_category}}" );
+        $("#edit_popup #task_project_edit1").val( "{{task.task_project}}" );
+        $("#edit_popup #task_priority_edit1").val( "{{task.task_priority}}" );
+        $("#edit_popup #task_status_edit1").val( "{{task.task_status}}" );
+        $("#edit_popup #task_note_edit1").val( "{{task.task_note}}" ); 
+        $("#edit_popup").modal('show');
+
+
+      $("#edit_list").click('submit', function(f3){
+            f3.preventDefault();
+            console.log(edit_id);
+            var text3="<td class='calls_row'>"+ document.getElementById('task_name_edit1').value + "<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_project_edit1').value+"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_priority_edit1').value +"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_duration_edit1').value+ "<i class='icon-sort'></i></td><td><div class='btn-group btn-group-xs controls' role='group' aria-label='...'' id=''><button type='button' class='btn btn-default btn-sm start_pause_resume' id=''><span class='glyphicon glyphicon-play' aria-hidden='true'></span></button><button type='button' class='btn btn-default btn-sm reset' id=''><span class='glyphicon glyphicon-refresh' aria-hidden='true'></span></button><i class='icon-sort'></i></td><td><div class='dropdown'><input type='button' class='btn btn-default btn-xs dropdown-toggle dropdown_calls ' id='' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' value='"+document.getElementById('task_status_edit1').value+"'><ul class='dropdown-menu dropdown_menu_calls dropdown-menu-right' aria-labelledby=''><li><a href=''>Yet To Start</a></li><li><a href=''>Started</a></li><li><a href=''>Paused</a></li><li><a href=''>Follow Up</a></li><li><a href=''>Completed</a></li></ul></div><i class='icon-sort'></i></td>";                                                                 
+           obj.html(text3);  
+            console.log($('#task_name_edit1').val());                                                 
+                             
+            
+            $.ajax({
+                url: '/todo/taskedit/',
+                type: 'POST',
+                data: {
+                  
+                  id:edit_id,
+                  
+                  task_name_edit:$('#task_name_edit1').val(),
+                  task_duration_edit:$('#task_duration_edit1').val(),
+                  task_actual_edit:$('#task_actual_edit1').val(),
+                  task_category_edit:$('#task_category_edit1').val(),
+                  task_project_edit:$('#task_project_edit1').val(),
+                  task_priority_edit:$('#task_priority_edit1').val(),
+                  task_status_edit:$('#task_status_edit1').val(),
+                  task_date_edit:$('#task_date_edit1').val(),
+                  task_time_edit:$('#task_time_edit1').val(),
+                  task_note_edit:$('#task_note_edit1').val(),
+              
+              
+
+                },
+                success: function(data){
+                    alert("Successfully.taskedit")
+                }
+            });
+       }); 
+       
+     }
+
+
+      
+      {% endfor %} 
+}
+else if($(this).text()=="Completed"){
+completed_flag3=edit_id;
+alert(completed_flag3);
+$("#completed_popup").modal('show'); 
+}
+  //   $('#Started').val($(this).text());
+/*
+$.post("",
+    {
+        task_status_change:$(this).text() ,
+        flag:1,
+        task_id:$(this).parents(".dropdown").find('.dropdown_list').attr('id')
+    },
+function(data, status){
+  
+  console.log(flag);
+        alert("\nStatus: " + status);
+  });
+*/
+
+alert($(this).text());
+alert($(this).parents(".dropdown").find('.dropdown_calls').attr('id'));
+  $.ajax({
+                url: '/todo/statuschange/',
+                type: 'POST',
+                data: {
+                  
+                  task_status_change:$(this).text(),
+                  flag:1,
+                  task_id:edit_id,
+                                             
+              
+
+                },
+                success: function(data){
+                    alert("Successfully.statuschange")
+                   // completed_flag=0;
+                    flag=0;
+                }
+            });
+
+    console.log(flag);
+    /*
+    var x= $(".dropdown_list").attr('id');
+  console.log(x);
+   $(".dropdown_list").slice(x).attr('value' , $(this).text());
+    console.log($(this).html());
+    e.preventDefault();
+   */
+});
+
+//function for clicking yes for completed popup//
+$(function(){
+       $("#task_completed_yes").click('submit', function(f){
+            f.preventDefault();
+          
+           
+            $.ajax({
+                url: '/todo/statuscompleted/',
+                type: 'POST',
+                data: {
+                       flag_completed:completed_flag3, 
+                                                           
+              
+
+                },
+                success: function(data){
+                    alert("Successfully. statuscompleted")
+                }
+            });
+            completed_flag3=0;
+            ;
+       }); 
+    });
+
+
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------//
+//function when the task name is clicked//
+
+    $(".task_row").click(function(h1){
+      h1.preventDefault();
+      var edit_id=$(this).attr('id');
+      var obj=$(this);
+        console.log(edit_id);
+    //    edit_id=1;
+      {% for task in task_item_inst_list %}
+      if({{task.id}}==edit_id){
+    //    $("#edit_popup #task_name_edit1").val( "{{task.task_name}}" );
+        $("#edit_popup #task_name_edit1").val( "{{task.task_name}}" );
+        $("#edit_popup #task_date_edit1").val( "{{task.task_date}}" );
+        $("#edit_popup #task_time_edit1").val( "{{task.task_time}}" );
+        $("#edit_popup #task_duration_edit1").val( "{{task.task_duration}}" );
+        $("#edit_popup #task_actual_edit1").val( "{{task.task_actual}}" );
+        $("#edit_popup #task_category_edit1").val( "{{task.task_category}}" );
+        $("#edit_popup #task_project_edit1").val( "{{task.task_project}}" );
+        $("#edit_popup #task_priority_edit1").val( "{{task.task_priority}}" );
+        $("#edit_popup #task_status_edit1").val( "{{task.task_status}}" );
+        $("#edit_popup #task_note_edit1").val( "{{task.task_note}}" );
+
+        $("#edit_popup").modal('show');
+
+      }
+      {% endfor %} 
+      $("#edit_list").click('submit', function(g1){
+            g1.preventDefault();
+            console.log(edit_id);
+            var text2="<td class='task_row'>"+ document.getElementById('task_name_edit1').value + "<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_project_edit1').value+"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_priority_edit1').value +"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_duration_edit1').value+ "<i class='icon-sort'></i></td><td><div class='btn-group btn-group-xs controls' role='group' aria-label='...'' id=''><button type='button' class='btn btn-default btn-sm start_pause_resume' id=''><span class='glyphicon glyphicon-play' aria-hidden='true'></span></button><button type='button' class='btn btn-default btn-sm reset' id=''><span class='glyphicon glyphicon-refresh' aria-hidden='true'></span></button><i class='icon-sort'></i></td><td><div class='dropdown'><input type='button' class='btn btn-default btn-xs dropdown-toggle dropdown_list ' id='' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' value='"+document.getElementById('task_status_edit1').value+"'><ul class='dropdown-menu dropdown_menu_list dropdown-menu-right' aria-labelledby=''><li><a href=''>Yet To Start</a></li><li><a href=''>Started</a></li><li><a href=''>Paused</a></li><li><a href=''>Follow Up</a></li><li><a href=''>Completed</a></li></ul></div><i class='icon-sort'></i></td>";                                                                 
+            obj.parent().html(text2);  
+
+            console.log($('#task_name_edit1').val());                                                 
+                             
+            
+            $.ajax({
+
+                url: '/todo/taskedit/',
+                type: 'POST',
+                data: {
+                  
+                  id:edit_id,
+                  
+                  task_name_edit:$('#task_name_edit1').val(),
+                  task_duration_edit:$('#task_duration_edit1').val(),
+                  task_actual_edit:$('#task_actual_edit1').val(),
+                  task_category_edit:$('#task_category_edit1').val(),
+                  task_project_edit:$('#task_project_edit1').val(),
+                  task_priority_edit:$('#task_priority_edit1').val(),
+                  task_status_edit:$('#task_status_edit1').val(),
+                  task_date_edit:$('#task_date_edit1').val(),
+                  task_time_edit:$('#task_time_edit1').val(),
+                  task_note_edit:$('#task_note_edit1').val(),
+                  
+              
+
+                },
+                success: function(data){
+                    
+                  alert("Successfully.list task name")
+                  
+                }
+            });
+
+       }); 
+     
+
+       
+    });
+
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------//
+//function when the email name is clicked//
+
+    $(".email_row").click(function(){
+      var edit_id=$(this).attr('id');
+      var obj=$(this);
+        console.log(edit_id);
+    //    edit_id=1;
+      {% for task in task_item_inst_email %}
+      if({{task.id}}==edit_id){
+        $("#edit_popup #task_name_edit1").val( "{{task.task_name}}" );
+        $("#edit_popup #task_date_edit1").val( "{{task.task_date}}" );
+        $("#edit_popup #task_time_edit1").val( "{{task.task_time}}" );
+        $("#edit_popup #task_duration_edit1").val( "{{task.task_duration}}" );
+        $("#edit_popup #task_actual_edit1").val( "{{task.task_actual}}" );
+        $("#edit_popup #task_category_edit1").val( "{{task.task_category}}" );
+        $("#edit_popup #task_project_edit1").val( "{{task.task_project}}" );
+        $("#edit_popup #task_priority_edit1").val( "{{task.task_priority}}" );
+        $("#edit_popup #task_status_edit1").val( "{{task.task_status}}" );
+        $("#edit_popup #task_note_edit1").val( "{{task.task_note}}" );
+
+        $("#edit_popup").modal('show');
+
+      
+     
+      $("#edit_list").click('submit', function(f){
+            f.preventDefault();
+            console.log(edit_id);
+            var text2="<td class='email_row'>"+ document.getElementById('task_name_edit1').value + "<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_project_edit1').value+"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_priority_edit1').value +"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_duration_edit1').value+ "<i class='icon-sort'></i></td><td><div class='btn-group btn-group-xs controls' role='group' aria-label='...'' id=''><button type='button' class='btn btn-default btn-sm start_pause_resume' id=''><span class='glyphicon glyphicon-play' aria-hidden='true'></span></button><button type='button' class='btn btn-default btn-sm reset' id=''><span class='glyphicon glyphicon-refresh' aria-hidden='true'></span></button><i class='icon-sort'></i></td><td><div class='dropdown'><input type='button' class='btn btn-default btn-xs dropdown-toggle dropdown_email ' id='' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' value='"+document.getElementById('task_status_edit1').value+"'><ul class='dropdown-menu dropdown_menu_email dropdown-menu-right' aria-labelledby=''><li><a href=''>Yet To Start</a></li><li><a href=''>Started</a></li><li><a href=''>Paused</a></li><li><a href=''>Follow Up</a></li><li><a href=''>Completed</a></li></ul></div><i class='icon-sort'></i></td>";                                                                 
+            obj.parent().html(text2);  
+            console.log($('#task_name_edit1').val());                                                 
+                             
+            
+            $.ajax({
+                url: '/todo/taskedit/',
+                type: 'POST',
+                data: {
+                  
+                  id:edit_id,
+                  
+                  task_name_edit:$('#task_name_edit1').val(),
+                  task_duration_edit:$('#task_duration_edit1').val(),
+                  task_actual_edit:$('#task_actual_edit1').val(),
+                  task_category_edit:$('#task_category_edit1').val(),
+                  task_project_edit:$('#task_project_edit1').val(),
+                  task_priority_edit:$('#task_priority_edit1').val(),
+                  task_status_edit:$('#task_status_edit1').val(),
+                  task_date_edit:$('#task_date_edit1').val(),
+                  task_time_edit:$('#task_time_edit1').val(),
+                  task_note_edit:$('#task_note_edit1').val(),
+              
+
+                },
+                success: function(data){
+                    alert("Successfully.")
+                }
+            });
+       }); 
+     }
+
+        {% endfor %} 
+    });
+
+
+
+
+
+//------------------------------------------------------------------------------------------------------------------------------------------//
+//function when the calls name is clicked//
+
+    $(".calls_row").click(function(){
+      var edit_id=$(this).attr('id');
+      var obj=$(this);
+        console.log(edit_id);
+    //    edit_id=1;
+      {% for task in task_item_inst_calls %}
+      if({{task.id}}==edit_id){
+        $("#edit_popup #task_name_edit1").val( "{{task.task_name}}" );
+        $("#edit_popup #task_date_edit1").val( "{{task.task_date}}" );
+        $("#edit_popup #task_time_edit1").val( "{{task.task_time}}" );
+        $("#edit_popup #task_duration_edit1").val( "{{task.task_duration}}" );
+        $("#edit_popup #task_actual_edit1").val( "{{task.task_actual}}" );
+        $("#edit_popup #task_category_edit1").val( "{{task.task_category}}" );
+        $("#edit_popup #task_project_edit1").val( "{{task.task_project}}" );
+        $("#edit_popup #task_priority_edit1").val( "{{task.task_priority}}" );
+        $("#edit_popup #task_status_edit1").val( "{{task.task_status}}" );
+        $("#edit_popup #task_note_edit1").val( "{{task.task_note}}" );
+
+        $("#edit_popup").modal('show');
+
+      
+     
+      $("#edit_list").click('submit', function(f){
+            f.preventDefault();
+            console.log(edit_id);
+            var text2="<td class='calls_row'>"+ document.getElementById('task_name_edit1').value + "<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_project_edit1').value+"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_priority_edit1').value +"<i class='icon-sort'></i></td><td class='header'>"+ document.getElementById('task_duration_edit1').value+ "<i class='icon-sort'></i></td><td><div class='btn-group btn-group-xs controls' role='group' aria-label='...'' id=''><button type='button' class='btn btn-default btn-sm start_pause_resume' id=''><span class='glyphicon glyphicon-play' aria-hidden='true'></span></button><button type='button' class='btn btn-default btn-sm reset' id=''><span class='glyphicon glyphicon-refresh' aria-hidden='true'></span></button><i class='icon-sort'></i></td><td><div class='dropdown'><input type='button' class='btn btn-default btn-xs dropdown-toggle dropdown_calls ' id='' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false' value='"+document.getElementById('task_status_edit1').value+"'><ul class='dropdown-menu dropdown_menu_calls dropdown-menu-right' aria-labelledby=''><li><a href=''>Yet To Start</a></li><li><a href=''>Started</a></li><li><a href=''>Paused</a></li><li><a href=''>Follow Up</a></li><li><a href=''>Completed</a></li></ul></div><i class='icon-sort'></i></td>";                                                                 
+            obj.parent().html(text2);  
+            console.log($('#task_name_edit1').val());                                                 
+                             
+            
+            $.ajax({
+                url: '/todo/taskedit/',
+                type: 'POST',
+                data: {
+                  
+                  id:edit_id,
+                  
+                  task_name_edit:$('#task_name_edit1').val(),
+                  task_duration_edit:$('#task_duration_edit1').val(),
+                  task_actual_edit:$('#task_actual_edit1').val(),
+                  task_category_edit:$('#task_category_edit1').val(),
+                  task_project_edit:$('#task_project_edit1').val(),
+                  task_priority_edit:$('#task_priority_edit1').val(),
+                  task_status_edit:$('#task_status_edit1').val(),
+                  task_date_edit:$('#task_date_edit1').val(),
+                  task_time_edit:$('#task_time_edit1').val(),
+                  task_note_edit:$('#task_note_edit1').val(),
+              
+
+                },
+                success: function(data){
+                    alert("Successfully.")
+                }
+            });
+       }); 
+     }
+
+        {% endfor %} 
+    });
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------//
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+// Timer Functionality
+
+
+$(function() {
+    
+    var hours = minutes = seconds = milliseconds = 0;
+    var prev_hours = prev_minutes = prev_seconds = prev_milliseconds = undefined;
+    var timeUpdate;
+  
+    // Start/Pause/Resume button onClick
+    $(".start_pause_resume").button().click(function(){
+        // Start button
+        console.log($(this).html());
+        if($(this).html() == '<span class="glyphicon glyphicon-play" aria-hidden="true"></span>'){  // check button label
+            $(this).html("<span class='ui-button-text'><span class='glyphicon glyphicon-pause' aria-hidden='true'></span></span>");
+            updateTime(0,0,0,0);
+        }
+    // Pause button
+        else if($(this).html() == '<span class="ui-button-text"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></span>'){
+            clearInterval(timeUpdate);
+            $(this).html("<span class='ui-button-text'><span class='glyphicon glyphicon-play' aria-hidden='true'></span></span>");
+        }
+    // Resume button    
+        else if($(this).html() =='<span class="ui-button-text"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></span>'){
+            prev_hours = parseInt($("#hours").html());
+            prev_minutes = parseInt($("#minutes").html());
+            prev_seconds = parseInt($("#seconds").html());
+            prev_milliseconds = parseInt($("#milliseconds").html());
+            
+            updateTime(prev_hours, prev_minutes, prev_seconds, prev_milliseconds);
+            
+            $(this).html("<span class='ui-button-text'><span class='glyphicon glyphicon-pause' aria-hidden='true'></span></span>");
+        }
+    });
+    
+    // Reset button onClick
+    $(".reset").button().click(function(){
+        if(timeUpdate) clearInterval(timeUpdate);
+        setStopwatch(0,0,0,0);
+        $(".start_pause_resume").html("<span class='ui-button-text'><span class='glyphicon glyphicon-play' aria-hidden='true'></span></span>");      
+    });
+    
+    // Update time in stopwatch periodically - every 25ms
+    function updateTime(prev_hours, prev_minutes, prev_seconds, prev_milliseconds){
+        var startTime = new Date();    // fetch current time
+        
+        timeUpdate = setInterval(function () {
+            var timeElapsed = new Date().getTime() - startTime.getTime();    // calculate the time elapsed in milliseconds
+            
+            // calculate hours                
+            hours = parseInt(timeElapsed / 1000 / 60 / 60) + prev_hours;
+            
+            // calculate minutes
+            minutes = parseInt(timeElapsed / 1000 / 60) + prev_minutes;
+            if (minutes > 60) minutes %= 60;
+            
+            // calculate seconds
+            seconds = parseInt(timeElapsed / 1000) + prev_seconds;
+            if (seconds > 60) seconds %= 60;
+            
+            // calculate milliseconds 
+            milliseconds = timeElapsed + prev_milliseconds;
+            if (milliseconds > 1000) milliseconds %= 1000;
+            
+            // set the stopwatch
+            setStopwatch(hours, minutes, seconds, milliseconds);
+            
+        }, 25); // update time in stopwatch after every 25ms
+        
+    }
+    
+    // Set the time in stopwatch
+    function setStopwatch(hours, minutes, seconds, milliseconds){
+        $("#hours").html(prependZero(hours, 2));
+        $("#minutes").html(prependZero(minutes, 2));
+        $("#seconds").html(prependZero(seconds, 2));
+   //     $("#milliseconds").html(prependZero(milliseconds, 3));
+    }
+    
+    // Prepend zeros to the digits in stopwatch
+    function prependZero(time, length) {
+        time = new String(time);    // stringify time
+        return new Array(Math.max(length - time.length + 1, 0)).join("0") + time;
+    }
+});
+
+
+
+    </script>
+
+
+    {% endblock %}
+
+
+
+    

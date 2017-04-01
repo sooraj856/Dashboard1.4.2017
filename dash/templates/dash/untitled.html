@@ -1,0 +1,406 @@
+
+                                  <div class="dropdown">
+                                    <input type="button" class="btn btn-default btn-xs dropdown-toggle dropdown_list" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="{{ task.task_status }}">
+                                 
+                                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_list">
+                                      <li><a href="#">Yet To Start</a></li>
+                                      <li><a href="#">Started</a></li>
+                                      <li><a href="#">Paused</a></li>
+                                      <li><a href="#">Follow Up</a></li>
+                                      <li role="separator" class="divider"></li>
+                                      <li><a href="#">Completed</a></li>
+                                    </ul>
+                                  </div>           
+
+ <select class="dropdown_list">
+                                    <option value="Yet To Start">Yet To Start</option>
+                                    <option value="Started">Started</option>
+                                    <option value="Paused" selected>Paused</option>
+                                    <option value="Follow Up">Follow Up</option>
+                                    <option value="Completed">Completed</option>
+                                  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Theme Company</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ <style>
+      /*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+}
+
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 71px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+  margin-top: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus 
+{
+  color: #fff;
+  background-color: #428bca;
+}
+
+.panelbg {
+    height:470px;
+    margin-left:-15px;
+    margin-top:-1px;
+  /*  margin-right:-15px;*/
+    border:1px solid black;
+  
+  }
+.panelbghalf {
+    height:225px;
+    margin-left:-15px;
+    margin-top:-2px;
+   /* margin-right:-15px;*/
+    margin-bottom:3px;
+    border:1px solid black;
+  
+  }
+strong{
+    font-size:120%;
+  }
+
+
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+  padding-top:4px;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+ </style>
+    
+ 
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">The Signature Inn<span class="sr-only">(current)</span></a></li>
+            <li><a href="#">To Do List</a></li>
+            <li><a href="#">Diary</a></li>
+          </ul>
+         
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Dashboard</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-12 col-sm-6 placeholder">
+              <div class="panel panel-primary panelbg">
+                <div class="panel-heading text-center">
+                 <strong>Todo List</strong>
+                  <button class="btn btn-default btn-sm pull-right" data-toggle="modal" data-target="#add_task_popup">Add task</button>
+                </div>
+                <div class="panel-body">
+                   <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped tablesorter">
+                          <thead>
+                            <tr>
+                              <th class="header"> Sl No <i class="icon-sort"></i></th>
+                              <th class="header"> Task <i class="icon-sort"></i></th>
+                              <th class="header"> Duration <i class="icon-sort"></i></th>
+                              <th class="header"> Project <i class="icon-sort"></i></th>
+                              <th class="header"> Priority <i class="icon-sort"></i></th>
+                              <th class="header"> Follow Up <i class="icon-sort"></i></th>
+                            </tr>
+                          </thead>
+                        <tbody>
+                          
+                            <tr>
+                              <td class="header">{{ task.task_name }}<i class="icon-sort"></i></td>
+                              <td class="header">{{ task.task_name }}<i class="icon-sort"></i></td>
+                              <td class="header"> Duration <i class="icon-sort"></i></td>
+                              <td class="header"> Project <i class="icon-sort"></i></td>
+                              <td class="header"> Priority <i class="icon-sort"></i></td>
+                              <td class="header"> Follow Up <i class="icon-sort"></i></td>
+                            </tr>
+                         
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+              </div>       
+            </div>
+           
+            <div class="col-xs-12 col-sm-6 placeholder">
+              <!--Email-->   
+              <div class="row"> 
+                <div class="col-xs-24 col-sm-12 placeholder">        
+                    <div class="panel panel-primary panelbghalf">
+                        <div class="panel-heading text-center">
+                         <strong>Email</strong>
+                        </div>
+                        <div class="panel-body">
+                            Email Body
+                        </div>                  
+                    </div>
+                </div>
+                <div class="col-sm-12 placeholder">        
+                    <div class="panel panel-primary panelbghalf">
+                        <div class="panel-heading text-center">
+                         <strong>Calls</strong>
+                        </div>
+                        <div class="panel-body">
+                            Calls Body
+                        </div>                  
+                    </div>                    
+                </div>
+              </div>  
+            </div>
+          </div>//row-2 end
+
+
+           <!-- Modal add task popup -->
+          <div id="add_task_popup" class="modal fade" role="dialog">
+           <div class="modal-dialog">
+
+            <!-- Modal content-->
+             <div class="modal-content">
+              <form class="form-horizontal" role="form" action="file:///C:/Users/admin/Python%20Programming/demonstration/app/templates/app/profile.html" method="post">
+               
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Add a New Task</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_name">Task:</label>
+                      <div class="col-lg-10">
+                        <input type="text" class="form-control" name="task_name" placeholder="Enter Task">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_duration">Duration:</label>
+                      <div class="col-lg-10"> 
+                        <input type="text" class="form-control" name="task_duration" placeholder="Enter Duration">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_category">Choose Category:</label>
+                      <div class="col-lg-10"> 
+                      <select class="form-control" name="task_category">
+                        <option value="Calls">Calls</option>
+                        <option value="Email">Email</option>
+                        <option value="List" selected>List</option>
+                      </select>
+                      </div>
+                    </div> 
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_project">Project:</label>
+                      <div class="col-lg-9"> 
+                        <select class="form-control" name="task_project">
+                          <option value="Signature">Signature</option>
+                          <option value="Coffee">Coffee</option>
+                          <option value="Stocks" selected>Stocks</option>
+                        </select>
+                      </div>
+                      <div class="clearfix visible-xs"></div>
+                      <div class="col-lg-1"> 
+                        <button type="button" class="btn btn-info pull-left">
+                          <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-lg-2" for="task_priority">Choose Priority:</label>
+                      <div class="col-lg-10"> 
+                      <select class="form-control" name="task_priority">
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low" selected>Low</option>
+                      </select>
+                      </div>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                  <input type="submit" class="btn btn-default" data-dismiss="modal" id="create_list" value="Add"/>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+               </form>
+             </div>
+           </div>
+          </div>
+        <!--end of Modal-->
+
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->  
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../static/bootstrap/docs/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../static/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../static/bootstrap/docs/assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../static/bootstrap/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
+    
+
+
+
+
+
+
+
+
+
+

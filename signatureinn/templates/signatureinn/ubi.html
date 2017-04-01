@@ -1,0 +1,216 @@
+ {% extends "dash/index.html" %}
+
+     {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'dailyacs.css' %}" type="text/css" />
+   {% block content %}
+   <style type="text/css">
+    .navbar-bottom{
+     padding: 10px;
+     border: 1px solid #428bca;
+     background-color: #f5f5f5;
+     
+
+      }
+    
+    .navbar-content{
+      top: -15px;
+    }
+
+    .group-down{
+      top: 0px;
+    }
+
+    .group-down-next{
+      top: 15px;
+    }
+
+    .size-change{
+      width: 65%;
+    }
+    .button-up{
+      top: -50px;
+
+    }
+   </style>
+   	<h1 class="page-header">Daily Accounts</h1>
+   	<div class"container-fluid">
+   		<div class="row">
+   			<div class="col-sm-6 col-md-6">
+   				<h2>Advance Receipts
+          <button type="button" class="btn btn-info pull-right" id="add_adv">
+          <span class="glyphicon glyphicon-plus"></span>
+          </button>
+          </h2>
+   				<div class="table-responsive">
+   					<table class="table table-condensed table-striped">
+  						          <thead>
+                            <tr>
+                              <th class="header"> Bill No <i class="icon-sort"></i></th>
+                              <th class="header"> Amount <i class="icon-sort"></i></th>                            
+                            </tr>
+                        </thead>
+                        <tbody>                        
+                          <div id="dynamic_input_adv">
+                            <tr>
+                              <td class="header"><input type="text" class="form-control" name="advance_no[]" value="1897"><i class="icon-sort"></i></td>
+                              <td class="header"><input type="text" class="form-control" name="advance_amt[]" value="23000"><i class="icon-sort"></i></td>                            
+                            </tr>
+                          </div>                      
+                        </tbody>
+					 </table>
+				</div>
+   			</div>
+   			<div class="col-sm-6 col-md-6">
+   				<h2>Invoice Receipts
+          <button type="button" class="btn btn-info pull-right" id="add_inv">
+          <span class="glyphicon glyphicon-plus"></span>
+          </button>
+          </h2>
+   				<div class="table-responsive">
+   					 <table class="table table-condensed table-striped">
+  						          <thead>
+                            <tr>
+                              <th class="header"> Bill No <i class="icon-sort"></i></th>
+                              <th class="header"> Amount <i class="icon-sort"></i></th>                            
+                            </tr>
+                        </thead>
+                        <tbody>
+                          <div id="dynamic_input_inv">
+                            <tr>
+                              <td class="header"><input type="text" class="form-control" name="invoice_no[]" value="1897"><i class="icon-sort"></i></td>
+                              <td class="header"><input type="text" class="form-control" name="invoice_amt[]" value="23000"><i class="icon-sort"></i></td>                            
+                            </tr>
+                          </div>                        
+                                               
+                        </tbody>
+				  	 </table>
+				  </div>
+   			</div>
+   		</div>
+      <div class="row">
+        <button type="button" class="btn btn-info align-center" id="cal_total">Calculate Total</button>
+      </div>
+   	  <div class="row">
+        <nav class="navbar navbar-default navbar-fixed-bottom navbar-bottom">
+          <div class="container">
+            <div class="row">              
+              <div class="form-group">
+                      <label class="control-label col-sm-1 col-md-1 group-down text-center" for="task_duration">Cash:</label>
+                      <div class="col-sm-2 col-md-2 group-down"> 
+                        <input type="text" class="form-control" name="task_duration" placeholder="Enter Cash">
+                      </div>
+              </div>                
+              <div class="form-group">
+                      <label class="control-label col-sm-1 col-md-1 navbar-content text-center" for="task_duration">Card:</label>
+                      <div class="col-sm-2 col-md-2 navbar-content"> 
+                        <input type="text" class="form-control" name="task_duration" placeholder="Enter Card">
+                      </div>
+              </div> 
+              <div class="form-group">
+                      <label class="control-label col-sm-1 col-md-1 navbar-content text-center" for="task_duration">Bank:</label>
+                      <div class="col-sm-2 col-md-2 navbar-content"> 
+                        <input type="text" class="form-control" name="task_duration" placeholder="Enter Bank">
+                      </div>
+              </div> 
+              <div class="form-group">
+                      <label class="control-label col-sm-1 col-md-1 navbar-content text-center" for="task_duration">Counter:</label>
+                      <div class="col-sm-2 col-md-2 navbar-content"> 
+                        <input type="text" class="form-control" name="task_duration" placeholder="Enter Counter">
+                      </div>
+              </div> 
+             
+            </div>
+            <div class="row">              
+              <div class="form-group">
+                      <label class="control-label col-sm-1 col-md-1 group-down-next text-center" for="task_duration">Daily Total:</label>
+                      <div class="col-sm-2 col-md-2 group-down-next">
+                        <input type="text" class="form-control" id="daily_total"> 
+                      </div>
+              </div>                
+              <div class="form-group">
+                      <label class="control-label col-sm-1 col-md-1  text-center" for="task_duration">OTA Rev:</label>
+                      <div class="col-sm-2 col-md-2 "> 
+                        <input type="text" class="form-control size-change" name="task_duration" >
+                        <a href="" class="btn btn-info pull-right btn-sm button-up" role="button">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                      </div>
+              </div> 
+              <div class="form-group">
+                      <label class="control-label col-sm-1 col-md-1 text-center" for="task_duration">Total Rev:</label>
+                      <div class="col-sm-2 col-md-2"> 
+                        <input type="text" class="form-control" name="task_duration" >
+                      </div>
+              </div> 
+              <div class="form-group">
+                      <label class="control-label col-sm-1 col-md-1 text-center" for="task_duration">Actual Rev:</label>
+                      <div class="col-sm-2 col-md-2"> 
+                        <input type="text" class="form-control" name="task_duration">
+                      </div>
+              </div> 
+             
+            </div>
+
+          </div>
+        </nav>
+      </div>
+	</div>
+
+<script>
+var inv_counter = 1;
+
+(function($) {
+    $.fn.goTo = function() {
+        $('html, body').animate({
+            scrollTop: $(this).offset().top + 'px'
+        }, 'fast');
+        return this; // for chaining...
+    }
+})(jQuery);
+
+var adv_counter=1;
+$(document).ready(function(){
+    $("#add_adv").click(function(e){
+       e.preventDefault();
+        var newdiv = document.createElement('div');
+        newdiv.innerHTML =" <br><input type='text' class='form-control' name='advance_no[]'> <input type='text' class='form-control' name='advance_amt[]'>";
+        document.getElementById('dynamic_input_adv').appendChild(newdiv);
+        adv_counter++;
+             
+    });
+
+$(document).ready(function(){
+    $("#add_inv").click(function(e){
+       e.preventDefault();
+        var newdiv = document.createElement('div');
+        newdiv.innerHTML =" <br><input type='text' class='form-control' name='invoice_no[]'> <input type='text' class='form-control' name='invoice_amt[]'>";
+        document.getElementById('dynamic_input_inv').appendChild(newdiv);
+        inv_counter++;
+             
+    });
+});
+
+
+});
+var total = 0;
+var i;
+
+
+$(document).ready(function(){
+    $("#cal_total").click(function(){
+      console.log(1000000000);
+      for (i = 0; i < adv_counter; i++) { 
+    total=total + Number(document.getElementsByName('advance_amt[]')[i].value);
+   }
+    for (i = 0; i < inv_counter; i++) { 
+    total=total + Number(document.getElementsByName('invoice_amt[]')[i].value);
+   }
+  document.getElementById('daily_total').value = total;
+  total=0;
+    });
+});
+
+
+</script>
+
+   	 {% endblock %}
